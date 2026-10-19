@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Калькулятор</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+</head>
+
+<body>
+  <div class="container mt-4">
+    <div class="row">
+      <div class="col-md-6">
+        <form id="forma_kalkulyator">
+          <div class="mb-3">
+            <label for="chislo1" class="form-label">Первое число</label>
+            <input type="number" step="any" class="form-control" id="chislo1" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="deystvie" class="form-label">Операция</label>
+            <select class="form-select" id="deystvie">
+              <option value="+">Сложение (+)</option>
+              <option value="-">Вычитание (-)</option>
+              <option value="*">Умножение (*)</option>
+              <option value="/">Деление (/)</option>
+              <option value="^">Возведение в степень (^)</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label for="chislo2" class="form-label">Второе число</label>
+            <input type="number" step="any" class="form-control" id="chislo2" required>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Посчитать</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="mt-3" id="otvet_blok"></div>
+    </div>
+  </div>
+
+  <script>
+    const forma = document.getElementById('forma_kalkulyator');
+
+    forma.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const a = Number(document.getElementById('chislo1').value);
+      const b = Number(document.getElementById('chislo2').value);
+      const znak = document.getElementById('deystvie').value;
+
+      let itog;
+
+      if (znak === '+') {
+        itog = a + b;
+      } else if (znak === '-') {
+        itog = a - b;
+      } else if (znak === '*') {
+        itog = a * b;
+      } else if (znak === '/') {
+        if (b === 0) {
+          itog = 'На ноль делить нельзя!';
+        } else {
+          itog = a / b;
+        }
+      } else if (znak === '^') {
+        itog = Math.pow(a, b);
+      }
+
+      const vivod = document.getElementById('otvet_blok');
+      vivod.innerHTML = `<p><b>Результат:</b> ${itog}</p>`;
+    });
+  </script>
+</body>
+</html>
