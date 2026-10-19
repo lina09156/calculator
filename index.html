@@ -12,15 +12,15 @@
   <div class="container mt-4">
     <div class="row">
       <div class="col-md-6">
-        <form id="forma_kalkulyator">
+        <form id="calc_form">
           <div class="mb-3">
-            <label for="chislo1" class="form-label">Первое число</label>
-            <input type="number" step="any" class="form-control" id="chislo1" required>
+            <label for="num1" class="form-label">Первое число</label>
+            <input type="number" step="any" class="form-control" id="num1" required>
           </div>
 
           <div class="mb-3">
-            <label for="deystvie" class="form-label">Операция</label>
-            <select class="form-select" id="deystvie">
+            <label for="operation" class="form-label">Операция</label>
+            <select class="form-select" id="operation">
               <option value="+">Сложение (+)</option>
               <option value="-">Вычитание (-)</option>
               <option value="*">Умножение (*)</option>
@@ -30,8 +30,8 @@
           </div>
 
           <div class="mb-3">
-            <label for="chislo2" class="form-label">Второе число</label>
-            <input type="number" step="any" class="form-control" id="chislo2" required>
+            <label for="num2" class="form-label">Второе число</label>
+            <input type="number" step="any" class="form-control" id="num2" required>
           </div>
 
           <button type="submit" class="btn btn-primary">Посчитать</button>
@@ -40,40 +40,40 @@
     </div>
 
     <div class="row">
-      <div class="mt-3" id="otvet_blok"></div>
+      <div class="mt-3" id="output"></div>
     </div>
   </div>
 
   <script>
-    const forma = document.getElementById('forma_kalkulyator');
+    const form = document.getElementById('calc_form');
 
-    forma.addEventListener('submit', (event) => {
+    form.addEventListener('submit', (event) => {
       event.preventDefault();
 
-      const a = Number(document.getElementById('chislo1').value);
-      const b = Number(document.getElementById('chislo2').value);
-      const znak = document.getElementById('deystvie').value;
+      const a = Number(document.getElementById('num1').value);
+      const b = Number(document.getElementById('num2').value);
+      const operation = document.getElementById('operation').value;
 
-      let itog;
+      let result;
 
-      if (znak === '+') {
-        itog = a + b;
-      } else if (znak === '-') {
-        itog = a - b;
-      } else if (znak === '*') {
-        itog = a * b;
-      } else if (znak === '/') {
+      if (operation === '+') {
+        result = a + b;
+      } else if (operation === '-') {
+        result = a - b;
+      } else if (operation === '*') {
+        result = a * b;
+      } else if (operation === '/') {
         if (b === 0) {
-          itog = 'На ноль делить нельзя!';
+          result = 'На ноль делить нельзя!';
         } else {
-          itog = a / b;
+          result = a / b;
         }
-      } else if (znak === '^') {
-        itog = Math.pow(a, b);
+      } else if (operation === '^') {
+        result = Math.pow(a, b);
       }
 
-      const vivod = document.getElementById('otvet_blok');
-      vivod.innerHTML = `<p><b>Результат:</b> ${itog}</p>`;
+      const output = document.getElementById('output');
+      output.innerHTML = `<p><b>Результат:</b> ${result}</p>`;
     });
   </script>
 </body>
